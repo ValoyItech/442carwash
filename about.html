@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About 442 Car Wash</title>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (no integrity so it won’t silently fail) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        referrerpolicy="no-referrer" />
+
+  <style>
+    .font-display { font-family: 'Bebas Neue', sans-serif; }
+    .font-body { font-family: 'Inter', sans-serif; }
+
+    html { scroll-behavior: smooth; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .scroll-reveal { opacity: 0; transform: translateY(24px); }
+    .scroll-reveal.active { animation: fadeInUp .8s ease-out forwards; }
+
+    /* soft glass */
+    .glass {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+    }
+
+    /* gradient ring */
+    .ring-grad {
+      box-shadow: 0 0 0 2px rgba(34,211,238,.30), 0 18px 60px rgba(2,132,199,.18);
+    }
+
+    /* background section helper */
+    .bg-fixed-ish { background-attachment: fixed; }
+    @media (max-width: 1024px){
+      .bg-fixed-ish { background-attachment: scroll; }
+    }
+
+
+    /* Sidebar open state */
+.sidebar-open #sidebar { transform: translateX(0); }
+.sidebar-open #sidebar-overlay { display: block; }
+
+/* Optional: stop body scroll when menu open */
+.sidebar-open body { overflow: hidden; }
+  </style>
+</head>
+
+<body class="h-full font-body bg-slate-50 text-slate-800 overflow-auto">
+
+  <!-- Sidebar Overlay -->
+<div id="sidebar-overlay" class="fixed inset-0 z-40 hidden bg-slate-950/60 backdrop-blur-sm"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar"
+  class="fixed top-0 left-0 z-50 h-full w-[86%] max-w-[340px] -translate-x-full transition-transform duration-300 ease-out">
+
+  <div class="h-full bg-white/90 backdrop-blur-xl border-r border-slate-200 shadow-2xl">
+    <!-- Header -->
+    <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/logo.png" alt="442 Car Wash" class="h-10 w-auto object-contain" />
+        <div class="leading-tight">
+          <div class="font-display text-xl text-slate-900 tracking-wide">442 CAR WASH</div>
+          <div class="text-xs text-slate-500 -mt-0.5">Alberton • Gauteng</div>
+        </div>
+      </a>
+
+      <button id="sidebar-close"
+        class="w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 grid place-items-center transition-colors"
+        aria-label="Close menu">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="p-5">
+      <div class="text-xs font-semibold tracking-widest text-slate-500">NAVIGATION</div>
+
+      <nav class="mt-4 grid gap-2">
+        <a href="index.html"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 grid place-items-center">
+            <i class="fa-solid fa-house"></i>
+          </span>
+          <span class="font-semibold text-slate-800">Home</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+
+        <a href="#services"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-700 grid place-items-center">
+            <i class="fa-solid fa-spray-can-sparkles"></i>
+          </span>
+          <span class="font-semibold text-slate-800">Services</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+
+        <a href="about.html"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 grid place-items-center">
+            <i class="fa-solid fa-circle-info"></i>
+          </span>
+          <span class="font-semibold text-slate-800">About Us</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+
+        <a href="#why-us"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 grid place-items-center">
+            <i class="fa-solid fa-shield-halved"></i>
+          </span>
+          <span class="font-semibold text-slate-800">Why Us</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+
+        <a href="#contact"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-orange-50 text-orange-700 grid place-items-center">
+            <i class="fa-solid fa-envelope-open-text"></i>
+          </span>
+          <span class="font-semibold text-slate-800">Contact</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+      </nav>
+
+      <!-- Quick Actions -->
+      <div class="mt-7 pt-6 border-t border-slate-200">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-semibold tracking-widest text-slate-500">QUICK ACTIONS</div>
+          <span class="text-[11px] px-2 py-1 rounded-full bg-slate-100 text-slate-600">Fast</span>
+        </div>
+
+        <div class="mt-4 grid gap-3">
+          <a href="tel:+27716362245"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors">
+            <i class="fa-solid fa-phone"></i> Call Now
+          </a>
+
+          <a href="https://wa.me/27799921925"
+            target="_blank" rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-green-600 text-white font-bold hover:bg-green-700 transition-colors">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
+
+          <a href="mailto:442carwash@gmail.com"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-colors">
+            <i class="fa-solid fa-envelope"></i> Email
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer strip -->
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-200 bg-white/80 backdrop-blur">
+      <div class="flex items-center justify-between text-xs text-slate-500">
+        <span><i class="fa-solid fa-location-dot mr-1 text-cyan-600"></i> Alberton</span>
+        <span class="font-semibold text-slate-700">442 Car Wash</span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-16 sm:h-20 flex items-center justify-between">
+        <a href="index.html" class="flex items-center flex-shrink-0">
+  <img
+    src="images/logo.png"
+    alt="442 Car Wash"
+    class="h-14 sm:h-16 w-auto max-w-[170px] object-contain"
+  />
+</a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#story" class="text-slate-600 hover:text-blue-700 font-medium">Story</a>
+          <a href="#impact" class="text-slate-600 hover:text-blue-700 font-medium">Impact</a>
+          <a href="#values" class="text-slate-600 hover:text-blue-700 font-medium">Values</a>
+          <a href="#mission" class="text-slate-600 hover:text-blue-700 font-medium">Mission</a>
+          <a href="/" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/20 transition-all">
+            Back Home
+          </a>
+        </div>
+
+        <button id="mobileBtn" class="md:hidden w-11 h-11 rounded-xl border border-slate-200 flex items-center justify-center text-slate-700 hover:bg-slate-50">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    
+  </nav>
+
+  <!-- HERO (image background) -->
+  <header class="pt-16 sm:pt-20">
+    <section class="relative min-h-[72vh] flex items-center bg-cover bg-center bg-no-repeat bg-fixed-ish"
+      style="background-image:url('images/hero2.jpg');">
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-blue-950/70 to-slate-950/85"></div>
+
+      <div class="relative z-10 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl py-16 sm:py-20">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-cyan-200 text-sm font-semibold">
+              <i class="fa-solid fa-sparkles"></i>
+              <span>About 442 Car Wash</span>
+            </div>
+
+            <h1 class="mt-6 font-display text-5xl sm:text-6xl lg:text-7xl text-white tracking-wide leading-[0.95]">
+              CLEAN TRUCKS.<br />
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-300">CLEAR STANDARDS.</span>
+            </h1>
+
+            <p class="mt-6 text-lg sm:text-xl text-blue-100/90 max-w-2xl">
+              A mobile truck & fleet washing partner based in Alberton, serving Gauteng with consistent quality,
+              photo evidence, and a purpose-driven team.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-4">
+              <a href="#story"
+                 class="px-7 py-3.5 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-bold hover:shadow-xl hover:shadow-cyan-500/20 transition-all">
+                <i class="fa-solid fa-arrow-down mr-2"></i>Our Story
+              </a>
+              <a href="https://wa.me/27799921925?text=Hi%20442%20Car%20Wash!%20I%27d%20like%20to%20learn%20more%20about%20your%20fleet%20services."
+                 target="_blank" rel="noopener noreferrer"
+                 class="px-7 py-3.5 rounded-full bg-white/10 border border-white/20 text-white font-bold hover:bg-white/15 transition-all">
+                <i class="fa-brands fa-whatsapp mr-2"></i>Chat on WhatsApp
+              </a>
+            </div>
+
+            <!-- quick stats -->
+            <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="glass rounded-2xl p-4">
+                <div class="text-cyan-200 text-xs font-semibold">Model</div>
+                <div class="text-white font-bold">Mobile-Based</div>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <div class="text-cyan-200 text-xs font-semibold">Area</div>
+                <div class="text-white font-bold">Gauteng</div>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <div class="text-cyan-200 text-xs font-semibold">Partner</div>
+                <div class="text-white font-bold">Supergroup</div>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <div class="text-cyan-200 text-xs font-semibold">Focus</div>
+                <div class="text-white font-bold">Fleet Care</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- STORY (clean white section) -->
+  <section id="story" class="py-20 sm:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-5 scroll-reveal">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm font-semibold">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Our Story</span>
+          </div>
+
+          <h2 class="mt-5 font-display text-4xl sm:text-5xl text-slate-900">
+            BUILT ON<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-600">CONSISTENCY</span>
+          </h2>
+
+          <p class="mt-5 text-slate-600 text-lg leading-relaxed">
+            442 Car Wash started with one simple promise: deliver a wash you can trust — every single time.
+            From hand-washing to structured checklists and inspections, we’ve grown into a dependable fleet partner
+            for businesses that can’t afford downtime or sloppy standards.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <div class="flex gap-4">
+              <div class="w-11 h-11 rounded-2xl bg-slate-900 text-white flex items-center justify-center">
+                <i class="fa-solid fa-clipboard-check"></i>
+              </div>
+              <div>
+                <div class="font-semibold text-slate-900">Checklist-driven work</div>
+                <div class="text-slate-600">Every wash follows a repeatable standard — not mood-based “effort”.</div>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-11 h-11 rounded-2xl bg-slate-900 text-white flex items-center justify-center">
+                <i class="fa-solid fa-camera"></i>
+              </div>
+              <div>
+                <div class="font-semibold text-slate-900">Photo evidence</div>
+                <div class="text-slate-600">Clients can verify the result. Transparency builds trust.</div>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-11 h-11 rounded-2xl bg-slate-900 text-white flex items-center justify-center">
+                <i class="fa-solid fa-truck-fast"></i>
+              </div>
+              <div>
+                <div class="font-semibold text-slate-900">We come to you</div>
+                <div class="text-slate-600">Depot, warehouse, distribution site — we fit your operations.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 scroll-reveal">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl ring-1 ring-slate-200">
+            <div class="aspect-[16/10] bg-cover bg-center"
+                 style="background-image:url('images/hero1.jpg');"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+              <div class="glass rounded-2xl p-5 sm:p-6">
+                <div class="text-white font-semibold text-lg">A clean fleet is a professional brand.</div>
+                <div class="text-blue-100/90 mt-1 text-sm">
+                  We focus on reliability, not shortcuts — because your trucks represent your business on every road.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid sm:grid-cols-3 gap-4">
+            <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50">
+              <div class="text-slate-500 text-xs font-semibold">Approach</div>
+              <div class="mt-1 font-bold text-slate-900">Professional</div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50">
+              <div class="text-slate-500 text-xs font-semibold">Standard</div>
+              <div class="mt-1 font-bold text-slate-900">Repeatable</div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50">
+              <div class="text-slate-500 text-xs font-semibold">Outcome</div>
+              <div class="mt-1 font-bold text-slate-900">Verified</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT (image background section) -->
+  <section id="impact"
+    class="relative py-20 sm:py-28 bg-cover bg-center bg-no-repeat bg-fixed-ish"
+    style="background-image:url('images/hero3.jpg');">
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-blue-950/75 to-slate-950/85"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl scroll-reveal">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-cyan-200 text-sm font-semibold">
+          <i class="fa-solid fa-handshake-angle"></i>
+          <span>Impact</span>
+        </div>
+
+        <h2 class="mt-5 font-display text-4xl sm:text-5xl text-white">
+          PURPOSE-DRIVEN<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-300">FLEET CARE</span>
+        </h2>
+
+        <p class="mt-5 text-blue-100/90 text-lg leading-relaxed">
+          We don’t just wash trucks — we build discipline, skills, and confidence.
+          Every service supports youth employment and a culture of accountability.
+        </p>
+      </div>
+
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <div class="glass rounded-3xl p-7 scroll-reveal">
+          <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white">
+            <i class="fa-solid fa-user-graduate text-xl"></i>
+          </div>
+          <h3 class="mt-5 text-white font-bold text-xl">Skills & Growth</h3>
+          <p class="mt-2 text-blue-100/85">
+            We grow people through real work standards — punctuality, detail, and professionalism.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-7 scroll-reveal" style="animation-delay:.08s;">
+          <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white">
+            <i class="fa-solid fa-people-group text-xl"></i>
+          </div>
+          <h3 class="mt-5 text-white font-bold text-xl">Employment</h3>
+          <p class="mt-2 text-blue-100/85">
+            We create meaningful opportunities that restore dignity and income stability.
+          </p>
+        </div>
+
+        <div class="glass rounded-3xl p-7 scroll-reveal" style="animation-delay:.16s;">
+          <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white">
+            <i class="fa-solid fa-shield-heart text-xl"></i>
+          </div>
+          <h3 class="mt-5 text-white font-bold text-xl">Trust</h3>
+          <p class="mt-2 text-blue-100/85">
+            Clear communication + photo proof = confidence for fleet managers and operators.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES (clean, modern cards) -->
+  <section id="values" class="py-20 sm:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto scroll-reveal">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 text-cyan-800 text-sm font-semibold">
+          <i class="fa-solid fa-gem"></i>
+          <span>Our Values</span>
+        </div>
+        <h2 class="mt-5 font-display text-4xl sm:text-5xl text-slate-900">THE 442 STANDARD</h2>
+        <p class="mt-3 text-slate-600 text-lg">These values guide every wash, every shift, every client relationship.</p>
+      </div>
+
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm hover:shadow-lg transition-all scroll-reveal">
+          <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="mt-5 font-bold text-slate-900">Excellence</h3>
+          <p class="mt-2 text-slate-600">We do it properly — every time — not “good enough”.</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm hover:shadow-lg transition-all scroll-reveal" style="animation-delay:.06s;">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500 text-white flex items-center justify-center">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <h3 class="mt-5 font-bold text-slate-900">Reliability</h3>
+          <p class="mt-2 text-slate-600">On-time, prepared, consistent — because fleets run on schedules.</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm hover:shadow-lg transition-all scroll-reveal" style="animation-delay:.12s;">
+          <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </div>
+          <h3 class="mt-5 font-bold text-slate-900">Integrity</h3>
+          <p class="mt-2 text-slate-600">We don’t cut corners — we earn trust and keep it.</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-7 border border-slate-200 shadow-sm hover:shadow-lg transition-all scroll-reveal" style="animation-delay:.18s;">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h3 class="mt-5 font-bold text-slate-900">Responsibility</h3>
+          <p class="mt-2 text-slate-600">We respect client property, people, and the community we serve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION/VISION (image accent panel) -->
+  <section id="mission" class="py-20 sm:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 items-stretch">
+        <div class="lg:col-span-7 scroll-reveal">
+          <div class="rounded-3xl border border-slate-200 p-8 sm:p-10 bg-gradient-to-br from-slate-50 to-white">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center">
+                <i class="fa-solid fa-flag"></i>
+              </div>
+              <h2 class="font-display text-4xl sm:text-5xl text-slate-900">MISSION & VISION</h2>
+            </div>
+
+            <div class="mt-8 grid gap-6">
+              <div class="rounded-2xl border border-slate-200 bg-white p-6">
+                <div class="text-sm font-semibold text-blue-700">
+                  <i class="fa-solid fa-bolt mr-2"></i>Our Mission
+                </div>
+                <p id="mission-statement" class="mt-3 text-slate-700 leading-relaxed text-lg">
+                  To deliver reliable, high-quality truck wash services that exceed client expectations while creating meaningful employment and building lasting professional relationships rooted in trust, excellence, and accountability.
+                </p>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 bg-white p-6">
+                <div class="text-sm font-semibold text-cyan-700">
+                  <i class="fa-solid fa-eye mr-2"></i>Our Vision
+                </div>
+                <p id="vision-statement" class="mt-3 text-slate-700 leading-relaxed text-lg">
+                  To become a trusted national brand in fleet management services, recognized for transforming lives through opportunity, while setting the standard for professional truck washing and proving that business success and community impact are inseparable.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 scroll-reveal">
+          <div class="h-full rounded-3xl overflow-hidden shadow-2xl ring-1 ring-slate-200 relative">
+            <div class="absolute inset-0 bg-cover bg-center"
+                 style="background-image:url('images/hero2.jpg');"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/15 to-slate-950/55"></div>
+
+            <div class="relative z-10 p-8 sm:p-10 flex flex-col h-full">
+              <div class="glass rounded-2xl p-6">
+                <div class="text-white font-bold text-xl">
+                  What you can expect
+                </div>
+                <ul class="mt-4 space-y-3 text-blue-100/90">
+                  <li class="flex gap-3">
+                    <i class="fa-solid fa-check text-cyan-300 mt-1"></i>
+                    <span>Clear communication and reliable scheduling</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <i class="fa-solid fa-check text-cyan-300 mt-1"></i>
+                    <span>Inspection mindset — not a rushed rinse</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <i class="fa-solid fa-check text-cyan-300 mt-1"></i>
+                    <span>Professional team standards on-site</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="mt-auto pt-8">
+                <div class="glass rounded-2xl p-6">
+                  <div class="text-cyan-200 text-sm font-semibold">Need fleet support?</div>
+                  <div class="mt-2 flex flex-col gap-3">
+                    <a href="tel:+27799921925"
+                       class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-white/10 border border-white/20 text-white font-bold hover:bg-white/15 transition-all">
+                      <i class="fa-solid fa-phone"></i> Call +27 799 921 925
+                    </a>
+                    <a href="https://wa.me/27799921925?text=Hi%20442%20Car%20Wash!%20I%27d%20like%20to%20discuss%20fleet%20washing%20options."
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-green-600 text-white font-bold hover:bg-green-700 transition-all">
+                      <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (modern, link-rich) -->
+  <footer class="bg-slate-950 text-slate-300 pt-16 pb-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="mb-5">
+  <a href="index.html" class="inline-block">
+    <img
+      src="images/logo.png"
+      alt="442 Car Wash"
+      class="h-24 w-auto object-contain"
+    />
+  </a>
+  <div class="text-xs text-slate-500 mt-2">
+    Alberton • Gauteng
+  </div>
+</div>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Mobile truck & fleet washing services with consistent standards, inspections, and professional delivery.
+          </p>
+
+          <div class="flex items-center gap-3 mt-6">
+            <a href="https://wa.me/27799921925" target="_blank" rel="noopener noreferrer"
+               class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-green-600 transition-all">
+              <i class="fa-brands fa-whatsapp text-white"></i>
+            </a>
+            <a href="mailto:442carwash@gmail.com"
+               class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-cyan-600 transition-all">
+              <i class="fa-solid fa-envelope text-white"></i>
+            </a>
+            <a href="tel:+27799921925"
+               class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-blue-600 transition-all">
+              <i class="fa-solid fa-phone text-white"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold mb-5">Explore</h3>
+          <ul class="space-y-3 text-sm">
+            <li><a class="hover:text-cyan-300 transition-colors" href="/">Home</a></li>
+            <li><a class="hover:text-cyan-300 transition-colors" href="#story">Our Story</a></li>
+            <li><a class="hover:text-cyan-300 transition-colors" href="#impact">Impact</a></li>
+            <li><a class="hover:text-cyan-300 transition-colors" href="#values">Values</a></li>
+            <li><a class="hover:text-cyan-300 transition-colors" href="#mission">Mission & Vision</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold mb-5">Contact</h3>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-location-dot text-cyan-300 mt-1"></i>
+              <span>Alberton, Gauteng (Mobile-Based)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-phone text-cyan-300 mt-1"></i>
+              <a href="tel:+27799921925" class="hover:text-cyan-300 transition-colors">+27 799 921 925</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-envelope text-cyan-300 mt-1"></i>
+              <a id="footer-email" href="mailto:442carwash@gmail.com" class="hover:text-cyan-300 transition-colors">442carwash@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold mb-5">Quick Actions</h3>
+          <div class="grid gap-3">
+            <a href="tel:+27799921925"
+               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-white/10 border border-white/15 hover:bg-white/15 transition-all text-white font-bold">
+              <i class="fa-solid fa-phone"></i> Call Now
+            </a>
+            <a href="https://wa.me/27799921925?text=Hi%20442%20Car%20Wash!%20I%27d%20like%20to%20get%20a%20fleet%20washing%20quote."
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-green-600 hover:bg-green-700 transition-all text-white font-bold">
+              <i class="fa-brands fa-whatsapp"></i> Get a Quote
+            </a>
+            <a href="#story"
+               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all text-white font-bold">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Read Story
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+        <p>© 2024 442 Car Wash. All rights reserved.</p>
+        <p class="flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-cyan-300"></i> Trusted Fleet Care Partner
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ================
+    // Scroll reveal
+    // ================
+    const observerOptions = { threshold: 0.12, rootMargin: '0px 0px -60px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+    // ================
+    // Mobile menu
+    // ================
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+      mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+    }
+
+    // ================
+    // Element SDK (editable mission/vision/contact email)
+    // ================
+    const defaultConfig = {
+      mission_statement: 'To deliver reliable, high-quality truck wash services that exceed client expectations while creating meaningful employment and building lasting professional relationships rooted in trust, excellence, and accountability.',
+      vision_statement: 'To become a trusted national brand in fleet management services, recognized for transforming lives through opportunity, while setting the standard for professional truck washing and proving that business success and community impact are inseparable.',
+      contact_email: '442carwash@gmail.com'
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const missionEl = document.getElementById('mission-statement');
+          if (missionEl) missionEl.textContent = config.mission_statement || defaultConfig.mission_statement;
+
+          const visionEl = document.getElementById('vision-statement');
+          if (visionEl) visionEl.textContent = config.vision_statement || defaultConfig.vision_statement;
+
+          const footerEmail = document.getElementById('footer-email');
+          if (footerEmail) {
+            const email = config.contact_email || defaultConfig.contact_email;
+            footerEmail.textContent = email;
+            footerEmail.href = `mailto:${email}`;
+          }
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['mission_statement', config.mission_statement || defaultConfig.mission_statement],
+          ['vision_statement', config.vision_statement || defaultConfig.vision_statement],
+          ['contact_email', config.contact_email || defaultConfig.contact_email]
+        ])
+      });
+    }
+  </script>
+  <script>
+  (function () {
+    const overlay = document.getElementById('sidebar-overlay');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('sidebar-close');
+
+    // Works on both pages: either id may exist
+    const openBtn = document.getElementById('mobile-menu-btn') || document.getElementById('mobileBtn');
+
+    if (!overlay || !sidebar || !openBtn || !closeBtn) return;
+
+    function openSidebar() {
+      document.documentElement.classList.add('sidebar-open');
+    }
+
+    function closeSidebar() {
+      document.documentElement.classList.remove('sidebar-open');
+    }
+
+    openBtn.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    // Close when clicking any link inside sidebar
+    sidebar.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', closeSidebar);
+    });
+
+    // ESC to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSidebar();
+    });
+  })();
+</script>
+
+</body>
+</html>

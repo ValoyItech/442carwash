@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>442 Car Wash</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    .font-display { font-family: 'Bebas Neue', sans-serif; }
+    .font-body { font-family: 'Inter', sans-serif; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(34, 211, 238, 0.6); }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
+    .animate-slide-in { animation: slideIn 0.6s ease-out; }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .carousel-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    
+    .carousel-slide.active {
+      opacity: 1;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #1e40af 0%, #0ea5e9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(30, 64, 175, 0.2);
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #0ea5e9;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .scroll-reveal.active {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 40;
+      transition: opacity 0.3s ease;
+    }
+    
+    .sidebar {
+      position: fixed;
+      left: -100%;
+      top: 0;
+      width: 80%;
+      max-width: 300px;
+      height: 100%;
+      background: white;
+      z-index: 50;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+    }
+    
+    .sidebar.active {
+      left: 0;
+    }
+
+    /* Sidebar open state */
+.sidebar-open #sidebar { transform: translateX(0); }
+.sidebar-open #sidebar-overlay { display: block; }
+
+/* Optional: stop body scroll when menu open */
+.sidebar-open body { overflow: hidden; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body bg-slate-50 text-slate-800 overflow-auto"><!-- Sidebar Overlay -->
+  <!-- Sidebar Overlay -->
+<div id="sidebar-overlay" class="fixed inset-0 z-40 hidden bg-slate-950/60 backdrop-blur-sm"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar"
+  class="fixed top-0 left-0 z-50 h-full w-[86%] max-w-[340px] -translate-x-full transition-transform duration-300 ease-out">
+
+  <div class="h-full bg-white/90 backdrop-blur-xl border-r border-slate-200 shadow-2xl">
+    <!-- Header -->
+    <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/logo.png" alt="442 Car Wash" class="h-10 w-auto object-contain" />
+        <div class="leading-tight">
+          <div class="font-display text-xl text-slate-900 tracking-wide">442 CAR WASH</div>
+          <div class="text-xs text-slate-500 -mt-0.5">Alberton • Gauteng</div>
+        </div>
+      </a>
+
+      <button id="sidebar-close"
+        class="w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 grid place-items-center transition-colors"
+        aria-label="Close menu">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="p-5">
+      <div class="text-xs font-semibold tracking-widest text-slate-500">NAVIGATION</div>
+
+      <nav class="mt-4 grid gap-2">
+        <a href="index.html"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 grid place-items-center">
+            <i class="fa-solid fa-house"></i>
+          </span>
+          <span class="font-semibold text-slate-800">Home</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+
+        <a href="#services"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-700 grid place-items-center">
+            <i class="fa-solid fa-spray-can-sparkles"></i>
+          </span>
+          <span class="font-semibold text-slate-800">Services</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+
+        <a href="about.html"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 grid place-items-center">
+            <i class="fa-solid fa-circle-info"></i>
+          </span>
+          <span class="font-semibold text-slate-800">About Us</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+
+        <a href="#why-us"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 grid place-items-center">
+            <i class="fa-solid fa-shield-halved"></i>
+          </span>
+          <span class="font-semibold text-slate-800">Why Us</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+
+        <a href="#contact"
+          class="sidebar-link group flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-slate-100 transition-colors">
+          <span class="w-10 h-10 rounded-xl bg-orange-50 text-orange-700 grid place-items-center">
+            <i class="fa-solid fa-envelope-open-text"></i>
+          </span>
+          <span class="font-semibold text-slate-800">Contact</span>
+          <i class="fa-solid fa-chevron-right ml-auto text-slate-300 group-hover:text-slate-400"></i>
+        </a>
+      </nav>
+
+      <!-- Quick Actions -->
+      <div class="mt-7 pt-6 border-t border-slate-200">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-semibold tracking-widest text-slate-500">QUICK ACTIONS</div>
+          <span class="text-[11px] px-2 py-1 rounded-full bg-slate-100 text-slate-600">Fast</span>
+        </div>
+
+        <div class="mt-4 grid gap-3">
+          <a href="tel:+27716362245"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors">
+            <i class="fa-solid fa-phone"></i> Call Now
+          </a>
+
+          <a href="https://wa.me/27799921925"
+            target="_blank" rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-green-600 text-white font-bold hover:bg-green-700 transition-colors">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
+
+          <a href="mailto:442carwash@gmail.com"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-colors">
+            <i class="fa-solid fa-envelope"></i> Email
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer strip -->
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-200 bg-white/80 backdrop-blur">
+      <div class="flex items-center justify-between text-xs text-slate-500">
+        <span><i class="fa-solid fa-location-dot mr-1 text-cyan-600"></i> Alberton</span>
+        <span class="font-semibold text-slate-700">442 Car Wash</span>
+      </div>
+    </div>
+  </div>
+</aside>
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+     <a href="index.html" class="flex items-center flex-shrink-0">
+  <img
+    src="images/logo.png"
+    alt="442 Car Wash"
+    class="h-14 sm:h-16 w-auto max-w-[170px] object-contain"
+  />
+</a>
+     <div class="hidden md:flex items-center gap-8"><a href="#services" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Services</a> <a href="about.html" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">About Us</a> <a href="#why-us" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Why Us</a> <a href="#contact" class="nav-link text-slate-600 hover:text-blue-600 font-medium transition-colors">Contact</a> <a href="#contact" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all">Book Online</a>
+     </div><button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg></button>
+    </div>
+   </div>
+  </nav><!-- Hero Carousel Section -->
+  <section class="relative w-full overflow-hidden pt-14 sm:pt-20">
+   <div class="carousel-container relative w-full h-screen overflow-hidden"><!-- Slide 1: Truck Wash -->
+    <div class="carousel-slide active">
+     <div class="relative w-full h-full overflow-hidden" style="background-image: url('images/hero1.jpg'); background-size: cover; background-position: center;">
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 via-blue-900/60 to-transparent"></div>
+      <div class="relative z-10 h-full flex items-center justify-center px-4">
+       <div class="text-center max-w-3xl">
+        <h1 id="hero-tagline" class="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 tracking-wide animate-fade-in-up drop-shadow-lg">YOUR TRUCK DESERVES<br><span class="text-cyan-400">THE BEST</span></h1>
+        <p class="text-lg sm:text-2xl text-white mb-12 animate-slide-in drop-shadow-md" style="animation-delay: 0.2s;">Professional truck &amp; fleet washing services in Alberton, Gauteng.<br>
+         We come to you!</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.4s;">
+         <a href="#contact" class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full font-bold text-lg hover:shadow-xl hover:shadow-cyan-500/30 transition-all transform hover:scale-105">Get Started</a> <a href="#services" class="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-full font-bold text-lg hover:bg-white/20 transition-all">View Services</a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Slide 2: Professional Washing -->
+    <!-- Slide 2: Professional Washing -->
+<div class="carousel-slide">
+  <div class="relative w-full h-full overflow-hidden"
+       style="background-image: url('images/hero2.jpg'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 via-blue-900/60 to-transparent"></div>
+
+    <div class="relative z-10 h-full flex items-center justify-center px-4">
+      <div class="text-center max-w-3xl">
+        <h2 class="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 tracking-wide animate-fade-in-up drop-shadow-lg">
+          CONSISTENT<br><span class="text-cyan-400">QUALITY</span>
+        </h2>
+
+        <p class="text-lg sm:text-2xl text-white mb-12 animate-slide-in drop-shadow-md" style="animation-delay: 0.2s;">
+          Strict checklists &amp; photo evidence for every wash.<br>
+          Reliable results, every time.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.4s;">
+          <a href="#why-us"
+             class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full font-bold text-lg hover:shadow-xl hover:shadow-cyan-500/30 transition-all transform hover:scale-105">
+            Learn More
+          </a>
+          <a href="#services"
+             class="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-full font-bold text-lg hover:bg-white/20 transition-all">
+            View Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3: Mobile Service -->
+<div class="carousel-slide">
+  <div class="relative w-full h-full overflow-hidden"
+       style="background-image: url('images/hero3.jpg'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 via-blue-900/60 to-transparent"></div>
+
+    <div class="relative z-10 h-full flex items-center justify-center px-4">
+      <div class="text-center max-w-3xl">
+        <h2 class="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 tracking-wide animate-fade-in-up drop-shadow-lg">
+          WE COME TO<br><span class="text-cyan-400">YOU</span>
+        </h2>
+
+        <p class="text-lg sm:text-2xl text-white mb-12 animate-slide-in drop-shadow-md" style="animation-delay: 0.2s;">
+          Mobile-based operation across Alberton &amp; Gauteng.<br>
+          On-site fleet washing that saves you time.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.4s;">
+          <a href="#contact"
+             class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full font-bold text-lg hover:shadow-xl hover:shadow-cyan-500/30 transition-all transform hover:scale-105">
+            Book Now
+          </a>
+          <a href="#services"
+             class="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-full font-bold text-lg hover:bg-white/20 transition-all">
+            View Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+   </div><!-- Carousel Controls - Positioned at top -->
+   <!-- Carousel Controls (proper positions) -->
+
+<!-- Left / Right arrows (centered) -->
+<div class="absolute inset-0 z-20 flex items-center justify-between px-4 sm:px-8 pointer-events-none">
+  <button id="carousel-prev"
+    class="pointer-events-auto p-3 sm:p-4 bg-white/15 hover:bg-white/30 text-white rounded-full transition-all backdrop-blur-sm border border-white/20">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <button id="carousel-next"
+    class="pointer-events-auto p-3 sm:p-4 bg-white/15 hover:bg-white/30 text-white rounded-full transition-all backdrop-blur-sm border border-white/20">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</div>
+
+<!-- Dots (bottom center) -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/15">
+  <div id="carousel-dots" class="flex gap-2 items-center"></div>
+</div>
+  </section>
+
+
+<section id="services" class="py-20 sm:py-28 bg-slate-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 scroll-reveal">
+     <span class="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold mb-4">OUR SERVICES</span>
+     <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-slate-800 mb-4">WASH PACKAGES</h2>
+     <p class="text-lg text-slate-600 max-w-2xl mx-auto">Choose the perfect wash package for your truck or fleet</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto"><!-- Exterior Wash -->
+     <div class="card-hover bg-white rounded-2xl p-6 shadow-lg border border-slate-100 scroll-reveal flex flex-col">
+      <div class="mb-4">
+       <h3 class="font-display text-2xl text-slate-800 mb-1">EXTERIOR WASH</h3>
+       <p class="text-slate-600 text-sm">30 min</p>
+      </div>
+      <div class="mb-6 flex-grow">
+       <p class="text-slate-600 text-sm space-y-2">Complete exterior wash including:<br>
+         ✓ High-pressure exterior wash<br>
+         ✓ Wheel cleaning<br>
+         ✓ Under-body rinse<br>
+         ✓ Final dry</p>
+      </div>
+      <div class="mb-6 border-t border-slate-200 pt-6">
+       <p class="text-slate-500 text-sm mb-1">South African rand</p><span id="exterior-price-display" class="font-display text-4xl text-blue-600">R350</span>
+      </div><button class="book-now-btn w-full py-3 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-all" data-service="Exterior Wash">Book Now</button>
+     </div><!-- Interior Detailing -->
+     <div class="card-hover bg-white rounded-2xl p-6 shadow-lg border border-slate-100 scroll-reveal flex flex-col">
+      <div class="mb-4">
+       <h3 class="font-display text-2xl text-slate-800 mb-1">INTERIOR DETAILING</h3>
+       <p class="text-slate-600 text-sm">30 min</p>
+      </div>
+      <div class="mb-6 flex-grow">
+       <p class="text-slate-600 text-sm space-y-2">Complete interior care including:<br>
+         ✓ Interior vacuum<br>
+         ✓ Seat cleaning<br>
+         ✓ Dashboard dusting<br>
+         ✓ Windows cleaning</p>
+      </div>
+      <div class="mb-6 border-t border-slate-200 pt-6">
+       <p class="text-slate-500 text-sm mb-1">South African rand</p><span id="interior-price-display" class="font-display text-4xl text-blue-600">R200</span>
+      </div><button class="book-now-btn w-full py-3 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-all" data-service="Interior Detailing">Book Now</button>
+     </div><!-- Full Service Wash -->
+     <div class="card-hover bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-6 shadow-xl relative overflow-hidden scroll-reveal flex flex-col">
+      <div class="absolute top-4 right-4 px-3 py-1 bg-cyan-400 text-slate-900 rounded-full text-xs font-bold">
+       POPULAR
+      </div>
+      <div class="mb-4">
+       <h3 class="font-display text-2xl text-white mb-1">FULL SERVICE WASH</h3>
+       <p class="text-cyan-200 text-sm">1 hr</p>
+      </div>
+      <div class="mb-6 flex-grow">
+       <p class="text-cyan-100 text-sm space-y-2">Complete wash package:<br>
+         ✓ Exterior wash &amp; wax<br>
+         ✓ Interior vacuum &amp; clean<br>
+         ✓ Windows &amp; mirrors<br>
+         ✓ Tire dressing<br>
+         ✓ Hand dry &amp; polish</p>
+      </div>
+      <div class="mb-6 border-t border-white/20 pt-6">
+       <p class="text-cyan-200 text-sm mb-1">South African rand</p><span id="full-service-price-display" class="font-display text-4xl text-cyan-400">R450</span>
+      </div><button class="book-now-btn w-full py-3 bg-cyan-400 text-slate-900 rounded-full font-bold hover:bg-cyan-300 transition-all" data-service="Full Service Wash">Book Now</button>
+     </div>
+    </div>
+   </div>
+  </section>
+
+
+  <section id="why-us" class="py-20 sm:py-28 relative bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 58, 138, 0.8) 100%), url('images/hero1.jpg');">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16 scroll-reveal"><span class="inline-block px-4 py-2 bg-white/20 text-cyan-300 rounded-full text-sm font-semibold mb-4">WHY CHOOSE US</span>
+     <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white mb-4">THE 442 DIFFERENCE</h2>
+     <p class="text-lg text-blue-200 max-w-2xl mx-auto">We're more than just a car wash — we're your trusted fleet care partner</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Feature 1 -->
+     <div class="card-hover bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 scroll-reveal">
+      <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-5">
+       <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+       </svg>
+      </div>
+      <h3 class="font-bold text-xl text-white mb-2">Tailored Solutions</h3>
+      <p class="text-blue-100">Every client and fleet is different. We offer flexible plans — whether it's one truck or an entire fleet.</p>
+     </div><!-- Feature 2 -->
+     <div class="card-hover bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 scroll-reveal" style="animation-delay: 0.1s;">
+      <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-5">
+       <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+       </svg>
+      </div>
+      <h3 class="font-bold text-xl text-white mb-2">Consistent Quality</h3>
+      <p class="text-blue-100">We follow a strict checklist, provide photo evidence, and never let a truck leave without proper inspection.</p>
+     </div><!-- Feature 3 -->
+     <div class="card-hover bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 scroll-reveal" style="animation-delay: 0.2s;">
+      <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-5">
+       <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+       </svg>
+      </div>
+      <h3 class="font-bold text-xl text-white mb-2">Mobile Services</h3>
+      <p class="text-blue-100">We come to you — whether you're at a depot, warehouse, or distribution site.</p>
+     </div><!-- Feature 4 -->
+     <div class="card-hover bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 scroll-reveal" style="animation-delay: 0.3s;">
+      <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-5">
+       <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+       </svg>
+      </div>
+      <h3 class="font-bold text-xl text-white mb-2">Proven Track Record</h3>
+      <p class="text-blue-100">Proudly partnered with Supergroup for over 2 years — delivering reliable service and earning continued trust.</p>
+     </div><!-- Feature 5 -->
+     <div class="card-hover bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 scroll-reveal" style="animation-delay: 0.4s;">
+      <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-5">
+       <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+       </svg>
+      </div>
+      <h3 class="font-bold text-xl text-white mb-2">Transparent Pricing</h3>
+      <p class="text-blue-100">Fair, clear, and competitive pricing — no hidden costs, just solid value.</p>
+     </div><!-- Feature 6 -->
+     <div class="card-hover bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 scroll-reveal" style="animation-delay: 0.5s;">
+      <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-5">
+       <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+       </svg>
+      </div>
+      <h3 class="font-bold text-xl text-white mb-2">Purpose-Driven</h3>
+      <p class="text-blue-100">We're rebuilding lives — supporting youth employment and community upliftment with every wash.</p>
+     </div>
+    </div>
+   </div>
+  </section>
+
+
+
+  <section id="contact" class="py-20 sm:py-28 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden"><!-- Decorative elements -->
+   <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+   <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16"><span class="inline-block px-4 py-2 bg-white/10 text-cyan-400 rounded-full text-sm font-semibold mb-4">GET IN TOUCH</span>
+     <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white mb-4">CONTACT US</h2>
+     <p class="text-lg text-blue-200 max-w-2xl mx-auto">Ready to get your fleet sparkling? Reach out today!</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-12"><!-- Contact Info -->
+     <div class="space-y-8">
+      <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+       <h3 class="font-display text-2xl text-white mb-6">CONTACT DETAILS</h3>
+       <div class="space-y-4">
+        <div class="flex items-center gap-4">
+         <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+         </div>
+         <div>
+          <p class="text-sm text-blue-300">Email</p><a id="contact-email-display" href="mailto:442carwash@gmail.com" class="text-white hover:text-cyan-400 transition-colors font-medium">442carwash@gmail.com</a>
+         </div>
+        </div>
+        <div class="flex items-center gap-4">
+         <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+         </div>
+         <div>
+          <p class="text-sm text-blue-300">Phone</p><a id="contact-phone1-display" href="tel:+27716362245" class="text-white hover:text-cyan-400 transition-colors font-medium block">+27 716 362 245</a> <a id="contact-phone2-display" href="tel:+27799921925" class="text-white hover:text-cyan-400 transition-colors font-medium block">+27 799 921 925</a>
+         </div>
+        </div>
+        <div class="flex items-center gap-4">
+         <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+         </div>
+         <div>
+          <p class="text-sm text-blue-300">Service Area</p>
+          <p class="text-white font-medium">Alberton, Gauteng</p>
+          <p class="text-cyan-400 text-sm">Mobile-Based — We come to you!</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+       <h3 class="font-display text-2xl text-white mb-6">OPERATING HOURS</h3>
+       <div class="space-y-3">
+        <div class="flex justify-between items-center"><span class="text-blue-200">Monday - Friday</span> <span class="text-white font-medium">8:00 AM - 6:00 PM</span>
+        </div>
+        <div class="flex justify-between items-center"><span class="text-blue-200">Saturday</span> <span class="text-white font-medium">9:00 AM - 5:00 PM</span>
+        </div>
+        <div class="flex justify-between items-center"><span class="text-blue-200">Sunday</span> <span class="text-white font-medium">9:00 AM - 5:00 PM</span>
+        </div>
+       </div>
+      </div>
+     </div><!-- Contact Form -->
+     <div class="bg-white rounded-3xl p-8 shadow-2xl">
+      <h3 class="font-display text-2xl text-slate-800 mb-6">BOOK A WASH</h3>
+      <form id="contact-form" class="space-y-5">
+       <div><label for="name" class="block text-sm font-medium text-slate-700 mb-2">Your Name</label> <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all" placeholder="John Smith">
+       </div>
+       <div><label for="email" class="block text-sm font-medium text-slate-700 mb-2">Email Address</label> <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all" placeholder="john@company.com">
+       </div>
+       <div><label for="phone" class="block text-sm font-medium text-slate-700 mb-2">Phone Number</label> <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all" placeholder="+27 000 000 000">
+       </div>
+       <div><label for="service" class="block text-sm font-medium text-slate-700 mb-2">Service Type</label> <select id="service" name="service" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"> <option value="">Select a service</option> <option value="basic">Basic Wash - R350</option> <option value="premium">Premium Wash - R450</option> <option value="fleet">Fleet Package - Custom Quote</option> </select>
+       </div>
+       <div><label for="message" class="block text-sm font-medium text-slate-700 mb-2">Message</label> <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none" placeholder="Tell us about your fleet or any special requirements..."></textarea>
+       </div><button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-[1.02]"> Send Message </button>
+      </form>
+      <div id="form-success" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+       <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+         <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+         </svg>
+        </div>
+        <div>
+         <p class="font-semibold text-green-800">Message Sent!</p>
+         <p class="text-sm text-green-600">We'll get back to you shortly.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+ <!-- FOOTER (modern, link-rich) -->
+  <footer class="bg-slate-950 text-slate-300 pt-16 pb-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="mb-5">
+  <a href="index.html" class="inline-block">
+    <img
+      src="images/logo.png"
+      alt="442 Car Wash"
+      class="h-24 w-auto object-contain"
+    />
+  </a>
+  <div class="text-xs text-slate-500 mt-2">
+    Alberton • Gauteng
+  </div>
+</div>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Mobile truck & fleet washing services with consistent standards, inspections, and professional delivery.
+          </p>
+
+          <div class="flex items-center gap-3 mt-6">
+            <a href="https://wa.me/27799921925" target="_blank" rel="noopener noreferrer"
+               class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-green-600 transition-all">
+              <i class="fa-brands fa-whatsapp text-white"></i>
+            </a>
+            <a href="mailto:442carwash@gmail.com"
+               class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-cyan-600 transition-all">
+              <i class="fa-solid fa-envelope text-white"></i>
+            </a>
+            <a href="tel:+27799921925"
+               class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-blue-600 transition-all">
+              <i class="fa-solid fa-phone text-white"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold mb-5">Explore</h3>
+          <ul class="space-y-3 text-sm">
+            <li><a class="hover:text-cyan-300 transition-colors" href="/">Home</a></li>
+            <li><a class="hover:text-cyan-300 transition-colors" href="#story">Our Story</a></li>
+            <li><a class="hover:text-cyan-300 transition-colors" href="#impact">Impact</a></li>
+            <li><a class="hover:text-cyan-300 transition-colors" href="#values">Values</a></li>
+            <li><a class="hover:text-cyan-300 transition-colors" href="#mission">Mission & Vision</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold mb-5">Contact</h3>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-location-dot text-cyan-300 mt-1"></i>
+              <span>Alberton, Gauteng (Mobile-Based)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-phone text-cyan-300 mt-1"></i>
+              <a href="tel:+27799921925" class="hover:text-cyan-300 transition-colors">+27 799 921 925</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-envelope text-cyan-300 mt-1"></i>
+              <a id="footer-email" href="mailto:442carwash@gmail.com" class="hover:text-cyan-300 transition-colors">442carwash@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-white font-semibold mb-5">Quick Actions</h3>
+          <div class="grid gap-3">
+            <a href="tel:+27799921925"
+               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-white/10 border border-white/15 hover:bg-white/15 transition-all text-white font-bold">
+              <i class="fa-solid fa-phone"></i> Call Now
+            </a>
+            <a href="https://wa.me/27799921925?text=Hi%20442%20Car%20Wash!%20I%27d%20like%20to%20get%20a%20fleet%20washing%20quote."
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-green-600 hover:bg-green-700 transition-all text-white font-bold">
+              <i class="fa-brands fa-whatsapp"></i> Get a Quote
+            </a>
+            <a href="about.html#story"
+               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all text-white font-bold">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Read Story
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+        <p>© 2024 442 Car Wash. All rights reserved.</p>
+        <p class="flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-cyan-300"></i> Trusted Fleet Care Partner
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+    <!-- Booking Modal -->
+<div id="booking-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4">
+  <!-- overlay -->
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+  <!-- modal card -->
+  <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden">
+    <div class="flex items-center justify-between p-6 border-b border-slate-100">
+      <h3 class="font-display text-2xl text-slate-800">Book Service</h3>
+
+      <button id="modal-close"
+        class="p-2 rounded-xl hover:bg-slate-100 transition-colors"
+        aria-label="Close">
+        <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="p-6">
+      <p class="text-slate-600">You’re booking:</p>
+      <p id="modal-service-name" class="mt-2 font-display text-3xl text-blue-700"></p>
+
+      <div class="mt-6 grid gap-3">
+        <a id="modal-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer"
+           class="w-full inline-flex items-center justify-center gap-3 py-3 px-4 rounded-2xl bg-green-600 text-white font-bold hover:bg-green-700 transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+          </svg>
+          Continue on WhatsApp
+        </a>
+
+        <a href="#contact"
+           class="w-full inline-flex items-center justify-center py-3 px-4 rounded-2xl bg-blue-50 text-blue-700 font-bold hover:bg-blue-100 transition-all">
+          Or use the contact form
+        </a>
+      </div>
+
+      <p class="mt-5 text-xs text-slate-500">
+        Tip: WhatsApp opens in a new tab/window.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      hero_tagline: 'YOUR TRUCK DESERVES THE BEST',
+      basic_price: 'R350',
+      premium_price: 'R450',
+      contact_email: '442carwash@gmail.com',
+      contact_phone1: '+27 716 362 245',
+      contact_phone2: '+27 799 921 925',
+      whatsapp_number: '+27 799 921 925',
+      background_color: '#0f172a',
+      surface_color: '#ffffff',
+      text_color: '#1e293b',
+      primary_color: '#2563eb',
+      accent_color: '#22d3ee'
+    };
+
+    let carouselIndex = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+
+    // Initialize carousel dots
+    const dotsContainer = document.getElementById('carousel-dots');
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = i === 0 ? 'w-2 h-2 bg-white rounded-full transition-all' : 'w-2 h-2 bg-white/40 rounded-full transition-all';
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      document.querySelectorAll('#carousel-dots button').forEach((dot, i) => {
+        dot.className = i === index ? 'w-2 h-2 bg-white rounded-full transition-all' : 'w-2 h-2 bg-white/40 rounded-full transition-all';
+      });
+    }
+
+    function nextSlide() {
+      carouselIndex = (carouselIndex + 1) % totalSlides;
+      showSlide(carouselIndex);
+    }
+
+    function prevSlide() {
+      carouselIndex = (carouselIndex - 1 + totalSlides) % totalSlides;
+      showSlide(carouselIndex);
+    }
+
+    function goToSlide(index) {
+      carouselIndex = index;
+      showSlide(carouselIndex);
+    }
+
+    document.getElementById('carousel-next').addEventListener('click', nextSlide);
+    document.getElementById('carousel-prev').addEventListener('click', prevSlide);
+
+    // Auto-rotate carousel
+    setInterval(nextSlide, 7000);
+
+    // Sidebar functionality
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebarClose = document.getElementById('sidebar-close');
+
+    function openSidebar() {
+      sidebar.classList.add('active');
+      sidebarOverlay.classList.remove('hidden');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('active');
+      sidebarOverlay.classList.add('hidden');
+    }
+
+    mobileMenuBtn.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar when clicking on a link
+    sidebar.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
+
+    // Scroll reveal animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Contact form submission with WhatsApp
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const service = document.getElementById('service').value;
+      const message = document.getElementById('message').value;
+
+      const whatsappMessage = `Hi 442 Car Wash! 👋\n\nI'd like to book a service:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\n\nMessage: ${message}`;
+      const whatsappURL = `https://wa.me/27799921925?text=${encodeURIComponent(whatsappMessage)}`;
+      
+      window.open(whatsappURL, '_blank');
+      
+      // Show success message
+      formSuccess.classList.remove('hidden');
+      contactForm.reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        formSuccess.classList.add('hidden');
+      }, 5000);
+    });
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update hero tagline
+          const heroTagline = document.getElementById('hero-tagline');
+          if (heroTagline) {
+            const tagline = config.hero_tagline || defaultConfig.hero_tagline;
+            heroTagline.innerHTML = tagline.replace('THE BEST', '<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">THE BEST</span>');
+          }
+          
+          // Update prices
+          const basicPrice = document.getElementById('basic-price-display');
+          if (basicPrice) basicPrice.textContent = config.basic_price || defaultConfig.basic_price;
+          
+          const premiumPrice = document.getElementById('premium-price-display');
+          if (premiumPrice) premiumPrice.textContent = config.premium_price || defaultConfig.premium_price;
+          
+          // Update contact info
+          const emailDisplay = document.getElementById('contact-email-display');
+          if (emailDisplay) {
+            const email = config.contact_email || defaultConfig.contact_email;
+            emailDisplay.textContent = email;
+            emailDisplay.href = `mailto:${email}`;
+          }
+          
+          const phone1Display = document.getElementById('contact-phone1-display');
+          if (phone1Display) {
+            const phone1 = config.contact_phone1 || defaultConfig.contact_phone1;
+            phone1Display.textContent = phone1;
+            phone1Display.href = `tel:${phone1.replace(/\s/g, '')}`;
+          }
+          
+          const phone2Display = document.getElementById('contact-phone2-display');
+          if (phone2Display) {
+            const phone2 = config.contact_phone2 || defaultConfig.contact_phone2;
+            phone2Display.textContent = phone2;
+            phone2Display.href = `tel:${phone2.replace(/\s/g, '')}`;
+          }
+
+          // Update footer links
+          const footerEmail = document.getElementById('footer-email-display');
+          if (footerEmail) {
+            const email = config.contact_email || defaultConfig.contact_email;
+            footerEmail.textContent = email;
+            footerEmail.href = `mailto:${email}`;
+          }
+
+          const footerPhone1 = document.getElementById('footer-phone1-display');
+          if (footerPhone1) {
+            const phone1 = config.contact_phone1 || defaultConfig.contact_phone1;
+            footerPhone1.textContent = phone1;
+            footerPhone1.href = `tel:${phone1.replace(/\s/g, '')}`;
+          }
+
+          const footerPhone2 = document.getElementById('footer-phone2-display');
+          if (footerPhone2) {
+            const phone2 = config.contact_phone2 || defaultConfig.contact_phone2;
+            footerPhone2.textContent = phone2;
+            footerPhone2.href = `tel:${phone2.replace(/\s/g, '')}`;
+          }
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => window.elementSdk.setConfig({ background_color: value })
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => window.elementSdk.setConfig({ surface_color: value })
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => window.elementSdk.setConfig({ primary_color: value })
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => window.elementSdk.setConfig({ accent_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['hero_tagline', config.hero_tagline || defaultConfig.hero_tagline],
+          ['basic_price', config.basic_price || defaultConfig.basic_price],
+          ['premium_price', config.premium_price || defaultConfig.premium_price],
+          ['contact_email', config.contact_email || defaultConfig.contact_email],
+          ['contact_phone1', config.contact_phone1 || defaultConfig.contact_phone1],
+          ['contact_phone2', config.contact_phone2 || defaultConfig.contact_phone2],
+          ['whatsapp_number', config.whatsapp_number || defaultConfig.whatsapp_number]
+        ])
+      });
+    }
+
+ // Booking modal functionality (safe)
+const bookingModal = document.getElementById('booking-modal');
+const modalClose = document.getElementById('modal-close');
+const bookNowButtons = document.querySelectorAll('.book-now-btn');
+const modalServiceName = document.getElementById('modal-service-name');
+const modalWhatsappBtn = document.getElementById('modal-whatsapp-btn');
+
+if (bookingModal && modalClose && modalServiceName && modalWhatsappBtn && bookNowButtons.length) {
+  bookNowButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const serviceName = btn.getAttribute('data-service') || 'Service';
+      modalServiceName.textContent = serviceName;
+
+      const whatsappMessage = `Hi 442 Car Wash! 👋 I'd like to book the ${serviceName} service.`;
+      modalWhatsappBtn.href = `https://wa.me/27799921925?text=${encodeURIComponent(whatsappMessage)}`;
+
+      bookingModal.classList.remove('hidden');
+    });
+  });
+
+  modalClose.addEventListener('click', () => bookingModal.classList.add('hidden'));
+
+  bookingModal.addEventListener('click', (e) => {
+    if (e.target === bookingModal) bookingModal.classList.add('hidden');
+  });
+}
+
+
+const footerBook = document.getElementById('footer-book-now');
+if (footerBook && bookingModal) {
+  footerBook.addEventListener('click', (e) => {
+    e.preventDefault();
+    modalServiceName.textContent = 'Quick Booking';
+    modalWhatsappBtn.href = `https://wa.me/27799921925?text=${encodeURIComponent('Hi 442 Car Wash! 👋 I’d like to book a wash.')}`;
+    bookingModal.classList.remove('hidden');
+  });
+}
+  </script>
+<script>
+  (function () {
+    const overlay = document.getElementById('sidebar-overlay');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('sidebar-close');
+
+    // Works on both pages: either id may exist
+    const openBtn = document.getElementById('mobile-menu-btn') || document.getElementById('mobileBtn');
+
+    if (!overlay || !sidebar || !openBtn || !closeBtn) return;
+
+    function openSidebar() {
+      document.documentElement.classList.add('sidebar-open');
+    }
+
+    function closeSidebar() {
+      document.documentElement.classList.remove('sidebar-open');
+    }
+
+    openBtn.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    // Close when clicking any link inside sidebar
+    sidebar.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', closeSidebar);
+    });
+
+    // ESC to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSidebar();
+    });
+  })();
+</script>
+ </body>
+</html>
